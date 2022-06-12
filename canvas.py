@@ -4,6 +4,14 @@ from random import randint
 from colorama import Fore
 
 
+DOUBLE_VERTI_PIPE = u"\u2551"
+DOUBLE_HORIZ_PIPE = u'\u2550'
+DOUBLE_LEFT_TOP = u'\u2554'
+DOUBLE_LEFT_BOTTOM = u'\u255a'
+DOUBLE_RIGHT_TOP = u'\u2557'
+DOUBLE_RIGHT_BOTTOM = u'\u255d'
+
+
 class Canvas:
     def __init__(self, h_max, v_max):
         self.h_max = h_max
@@ -28,17 +36,17 @@ class Canvas:
         background = " "
         if v == 0 or v == self.v_max - 1 or h == 0 or h == self.h_max - 1:
             if h == 0 or h == self.h_max - 1:
-                background = "\u2551"
+                background = DOUBLE_VERTI_PIPE
             elif v == 0 or v == self.v_max - 1:
-                background = "\u2550"
+                background = DOUBLE_HORIZ_PIPE
             if h == 0 and v == 0:
-                background = "\u2554"
+                background = DOUBLE_LEFT_TOP
             elif h == 0 and v == self.v_max - 1:
-                background = "\u255a"
+                background = DOUBLE_LEFT_BOTTOM
             elif h == self.h_max - 1 and v == 0:
-                background = "\u2557"
+                background = DOUBLE_RIGHT_TOP
             elif h == self.h_max - 1 and v == self.v_max - 1:
-                background = "\u255d"
+                background = DOUBLE_RIGHT_BOTTOM
         return background
 
     def _get_cells_in_focus(self, h, v):

@@ -1,12 +1,12 @@
 from sys import stdout
-from random import choice
+from random import choice, sample
 from colorama import Fore
 from itertools import cycle
 
 
 class Cell:
     def __init__(self, color, power, canvas, h=None, v=None):
-        self._body = cycle([chr(186), chr(174)])
+        self._body = cycle(sample([chr(186), chr(164)], 2))
         self._color = color
         self.power = power
         self._canvas = canvas

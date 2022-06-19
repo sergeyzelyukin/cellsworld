@@ -79,3 +79,5 @@ class Canvas:
             self.cells.remove(not_alive_cell)
         for cell in self.cells:
             cell.move()
+        for cell in self.cells:
+            cell.age()

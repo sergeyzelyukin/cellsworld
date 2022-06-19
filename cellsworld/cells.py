@@ -35,15 +35,21 @@ class Cell:
 
 
 class RedCell(Cell):
+    power = 20
+
     def __init__(self, canvas, h=None, v=None):
-        super().__init__(color=Fore.RED, power=20, canvas=canvas, h=h, v=v)
+        super().__init__(color=Fore.RED, power=self.power, canvas=canvas, h=h, v=v)
 
 
 class GreenCell(Cell):
+    power = 15
+
     def __init__(self, canvas, h=None, v=None):
-        super().__init__(color=Fore.GREEN, power=15, canvas=canvas, h=h, v=v)
+        super().__init__(color=Fore.GREEN, power=self.power, canvas=canvas, h=h, v=v)
 
 
 class BlueCell(Cell):
+    power = 10
+
     def __init__(self, canvas, h=None, v=None):
-        super().__init__(color=Fore.BLUE, power=10, canvas=canvas, h=h, v=v)
+        super().__init__(color=Fore.BLUE, power=self.power, canvas=canvas, h=h, v=v)

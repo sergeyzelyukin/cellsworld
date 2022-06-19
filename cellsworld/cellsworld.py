@@ -2,9 +2,12 @@
 
 import time
 
-from cells import RedCell, BlueCell, GreenCell
-from canvas import Canvas
-from fight import fight_function
+from cellsworld.cells import RedCell, BlueCell, GreenCell
+from cellsworld.canvas import Canvas
+from cellsworld.fight import fight_function
+
+DEFAULT_FRAME_RATE = 0.2
+DEFAULT_FRAMES_COUNT = 1000
 
 
 def main():
@@ -18,9 +21,11 @@ def main():
     )
     canvas.on_cells_clash = fight_function
 
-    for _ in range(100):
+    frames_count = DEFAULT_FRAMES_COUNT
+    frame_rate = DEFAULT_FRAME_RATE
+    for _ in range(frames_count):
         canvas.draw_frame()
-        time.sleep(1)
+        time.sleep(frame_rate)
         canvas.poke_cells()
 
 

@@ -2,12 +2,12 @@ from setuptools import find_packages, setup
 
 setup(
     name="cellsworld",
-    version="0.001",
+    version="0.003",
     packages=find_packages("cellsworld"),
     install_requires=[],
     entry_points={
         "console_scripts": [
-            "cellsworld=cellsworld.cellsworld:main",
+            "cellsworld=cellsworld.cellsworld:start",
         ]
     },
 )

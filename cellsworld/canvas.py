@@ -2,6 +2,7 @@ from sys import stdout
 from os import system
 from random import randint
 from colorama import Fore
+from itertools import cycle
 
 
 DOUBLE_VERTI_PIPE = "\u2551"
@@ -17,6 +18,8 @@ class Canvas:
         self.h_max = h_max
         self.v_max = v_max
         self.cells = []
+        self.current_frame = 0
+        self._progress_cycle = cycle(["-", "\\", "|", "/"])
 
     @property
     def random_h(self):
@@ -72,6 +75,17 @@ class Canvas:
                 else:
                     stdout.write(background)
             stdout.write("\n")
+        stdout.flush()
+        self.current_frame += 1
+
+    def print_progress(self, frames_count):
+        progress_pct = self.current_frame * 100 / frames_count
+        done_bars = round(progress_pct * self.h_max / 100)
+        rest_bars = self.h_max - done_bars
+        stdout.write("*" * done_bars)
+        if rest_bars > 0:
+            stdout.write(next(self._progress_cycle) + "." * (rest_bars - 1))
+        stdout.write("\n")
         stdout.flush()
 
     def poke_cells(self):

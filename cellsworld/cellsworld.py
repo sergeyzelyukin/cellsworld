@@ -31,6 +31,7 @@ def start(width, height, frames_count, frame_rate):
 
     for _ in range(frames_count):
         canvas.draw_frame()
+        canvas.print_progress(frames_count)
         time.sleep(frame_rate)
         canvas.poke_cells()
 

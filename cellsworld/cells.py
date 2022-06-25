@@ -5,61 +5,72 @@ from itertools import cycle
 
 
 class Cell:
-    def __init__(self, color, power, canvas, h=None, v=None, max_age=None):
-        self._body = cycle(sample([chr(186), chr(164)], 2))
-        self._color = color
-        self.power = power
+    color = Fore.WHITE
+    power = None
+    max_age = None
+
+    def __init__(self, canvas, h=None, v=None):
         self._canvas = canvas
-        self.h = h if h else canvas.random_h
-        self.v = v if v else canvas.random_v
+        self._h = h if h else canvas.random_h
+        self._v = v if v else canvas.random_v
+        self._body = cycle(sample([chr(186), chr(164)], 2))
         self.is_alive = True
-        self.current_age = 0
-        self._max_age = max_age
+        self._current_age = 0
+
+    def is_in_position(self, h, v):
+        return self._h == h and self._v == v
 
     def _random_walk_within_canvas(self):
         while True:
-            new_h = self.h + choice([-1, 0, 1])
+            new_h = self._h + choice([-1, 0, 1])
             if new_h > 0 and new_h < self._canvas.h_max - 1:
                 break
-        self.h = new_h
+        self._h = new_h
 
         while True:
-            new_v = self.v + choice([-1, 0, 1])
+            new_v = self._v + choice([-1, 0, 1])
             if new_v > 0 and new_v < self._canvas.v_max - 1:
                 break
-        self.v = new_v
+        self._v = new_v
 
-    def move(self):
+    def _move(self):
+        if not self.is_alive:
+            return
         self._random_walk_within_canvas()
 
-    def age(self):
-        self.current_age += 1
-        if self._max_age and self.current_age > self._max_age:
-            self.is_alive = False
+    def _age(self):
+        if not self.is_alive:
+            return
+        self._current_age += 1
+        if self.max_age and self._current_age > self.max_age:
+            self.die()
+
+    def die(self):
+        self.is_alive = False
+
+    def live(self):
+        if not self.is_alive:
+            return
+        self._move()
+        self._age()
 
     def draw(self):
-        stdout.write(f"{self._color}{next(self._body)}{Fore.RESET}")
+        stdout.write(f"{self.color}{next(self._body)}{Fore.RESET}")
 
 
 class RedCell(Cell):
+    color = Fore.RED
     power = 20
     max_age = 100
 
-    def __init__(self, canvas, h=None, v=None):
-        super().__init__(color=Fore.RED, power=self.power, canvas=canvas, h=h, v=v, max_age=self.max_age)
-
 
 class GreenCell(Cell):
+    color = Fore.GREEN
     power = 15
     max_age = 200
 
-    def __init__(self, canvas, h=None, v=None):
-        super().__init__(color=Fore.GREEN, power=self.power, canvas=canvas, h=h, v=v, max_age=self.max_age)
-
 
 class BlueCell(Cell):
+    color = Fore.BLUE
     power = 10
     max_age = 400
-
-    def __init__(self, canvas, h=None, v=None):
-        super().__init__(color=Fore.BLUE, power=self.power, canvas=canvas, h=h, v=v, max_age=self.max_age)

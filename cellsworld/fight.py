@@ -9,4 +9,4 @@ def fight_function(cells_in_focus):
         else:
             powerful_cells.append(cell)
     for cell in set(cells_in_focus) - set(powerful_cells):
-        cell.is_alive = False
+        cell.die()

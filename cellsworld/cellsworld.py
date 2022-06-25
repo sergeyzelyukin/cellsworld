@@ -33,7 +33,7 @@ def start(width, height, frames_count, frame_rate):
         canvas.draw_frame()
         canvas.print_progress(frames_count)
         time.sleep(frame_rate)
-        canvas.poke_cells()
+        canvas.animate_cells()
 
 
 if __name__ == "__main__":

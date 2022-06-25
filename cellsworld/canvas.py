@@ -55,7 +55,7 @@ class Canvas:
     def _get_cells_in_focus(self, h, v):
         cells_in_focus = []
         for cell in self.cells:
-            if cell.h == h and cell.v == v:
+            if cell.is_in_position(h, v):
                 cells_in_focus.append(cell)
         return cells_in_focus
 
@@ -88,10 +88,8 @@ class Canvas:
         stdout.write("\n")
         stdout.flush()
 
-    def poke_cells(self):
+    def animate_cells(self):
         for not_alive_cell in [cell for cell in self.cells if not cell.is_alive]:
             self.cells.remove(not_alive_cell)
         for cell in self.cells:
-            cell.move()
-        for cell in self.cells:
-            cell.age()
+            cell.live()

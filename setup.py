@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="cellsworld",
-    version="0.004",
+    version="0.005",
     packages=find_packages("cellsworld"),
     install_requires=[],
     entry_points={

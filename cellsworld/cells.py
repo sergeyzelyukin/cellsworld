@@ -82,7 +82,7 @@ class Cell:
         self._clashed = True
 
     def draw(self):
-        stdout.write(f"{self.color}{next(self._body)}{Fore.RESET}")
+        return f"{self.color}{next(self._body)}{Fore.RESET}"
 
 
 class RedCell(Cell):
@@ -90,20 +90,20 @@ class RedCell(Cell):
     power = 20
     max_age = 50
     reproduction_period = 40
-    number_of_kids = 1
+    number_of_kids = 2
 
 
 class GreenCell(Cell):
     color = Fore.GREEN
     power = 15
     max_age = 30
-    reproduction_period = 20
-    number_of_kids = 1
+    reproduction_period = 15
+    number_of_kids = 2
 
 
 class BlueCell(Cell):
     color = Fore.BLUE
     power = 10
-    max_age = 5
+    max_age = 6
     reproduction_period = 3
     number_of_kids = 1

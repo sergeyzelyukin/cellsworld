@@ -10,3 +10,6 @@ def fight_function(cells_in_focus):
             powerful_cells.append(cell)
     for cell in set(cells_in_focus) - set(powerful_cells):
         cell.die()
+    if len(powerful_cells) > 1:
+        for cell in powerful_cells:
+            cell.clash()

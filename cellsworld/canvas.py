@@ -91,5 +91,8 @@ class Canvas:
     def animate_cells(self):
         for not_alive_cell in [cell for cell in self.cells if not cell.is_alive]:
             self.cells.remove(not_alive_cell)
+        kids = []
         for cell in self.cells:
-            cell.live()
+            kids.extend(cell.live())
+        if kids:
+            self.add_cells(kids)

@@ -4,6 +4,15 @@ from colorama import Fore
 from itertools import cycle
 
 
+def alive_only(func):
+    def inner_func(obj, *args, **kwargs):
+        if not obj.is_alive:
+            return
+        func(obj, *args, **kwargs)
+
+    return inner_func
+
+
 class Cell:
     color = Fore.WHITE
     power = None
@@ -33,14 +42,12 @@ class Cell:
                 break
         self._v = new_v
 
+    @alive_only
     def _move(self):
-        if not self.is_alive:
-            return
         self._random_walk_within_canvas()
 
+    @alive_only
     def _age(self):
-        if not self.is_alive:
-            return
         self._current_age += 1
         if self.max_age and self._current_age > self.max_age:
             self.die()
@@ -48,9 +55,8 @@ class Cell:
     def die(self):
         self.is_alive = False
 
+    @alive_only
     def live(self):
-        if not self.is_alive:
-            return
         self._move()
         self._age()
 

@@ -8,9 +8,9 @@ from cellsworld.canvas import Canvas
 from cellsworld.fight import fight_function
 
 DEFAULT_FRAME_RATE = 0.2
-DEFAULT_FRAMES_COUNT = 1000
-DEFAULT_WIDTH = 20
-DEFAULT_HEIGHT = 10
+DEFAULT_FRAMES_COUNT = 200
+DEFAULT_WIDTH = 40
+DEFAULT_HEIGHT = 20
 
 
 @click.command()
@@ -23,7 +23,13 @@ def start(width, height, frames_count, frame_rate):
     canvas.add_cells(
         [
             RedCell(canvas=canvas),
+            RedCell(canvas=canvas),
+            RedCell(canvas=canvas),
             GreenCell(canvas=canvas),
+            GreenCell(canvas=canvas),
+            GreenCell(canvas=canvas),
+            BlueCell(canvas=canvas),
+            BlueCell(canvas=canvas),
             BlueCell(canvas=canvas),
         ]
     )

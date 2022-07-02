@@ -60,7 +60,7 @@ class Canvas:
         return cells_in_focus
 
     def draw_frame(self):
-        system("clear")
+        frame = ""
         for v in range(self.v_max):
             for h in range(self.h_max):
                 background = self._get_position_background(h, v)
@@ -68,15 +68,18 @@ class Canvas:
                 cells_in_focus = self._get_cells_in_focus(h, v)
                 if cells_in_focus:
                     if len(cells_in_focus) == 1:
-                        cells_in_focus[0].draw()
+                        frame += cells_in_focus[0].draw()
                     else:
                         self.on_cells_clash(cells_in_focus)
-                        stdout.write(f"{Fore.YELLOW}*{Fore.RESET}")
+                        frame += f"{Fore.YELLOW}*{Fore.RESET}"
                 else:
-                    stdout.write(background)
-            stdout.write("\n")
-        stdout.flush()
+                    frame += background
+            frame += "\n"
         self.current_frame += 1
+
+        system("clear")
+        stdout.write(frame)
+        stdout.flush()
 
     def print_progress(self, frames_count):
         progress_pct = self.current_frame * 100 / frames_count
